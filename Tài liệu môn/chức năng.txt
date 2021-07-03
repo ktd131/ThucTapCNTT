@@ -1,0 +1,25 @@
+Tên đề tài : Xây dựng website trao đổi giữa nhà trường THPT và gia đình
+User : nhà trường : giáo viên, bộ phận quản lý; gia đình : gia đình
+Chức năng : gia đình :
+	      +	xem thời khóa biểu
+	      + nhận các thông báo về việc vắng mặt của học sinh
+	      + tra cứu kết quả học tập, lịch thi của học sinh
+              + xin nghỉ học trực tuyến
+	      + xem tin tức về các hoạt động của nhà trường
+	      + nhắn tin hỏi đáp về vấn đề của học sinh và nhà trường
+            giáo viên :
+	      + nhập, sửa các loại điểm của học sinh vào cơ sở dữ liệu
+	      + điểm danh học sinh
+              + xem tin tức về các hoạt động của nhà trường
+              + giải đáp thắc mắc về câu hỏi của gia đình về học sinh
+            bộ phận quản lý :
+              + lập, sửa thời khóa biểu
+              + thông báo thời khóa biểu, kế hoạch ôn tập, lịch thi
+              + thông báo kết quả học tập học sinh
+              + thông báo tin tức hoạt động của nhà trường
+              + duyệt đơn xin nghỉ học trực tuyến
+	      + giải đáp thắc mắc về câu hỏi của gia đình về nhà trường
+  
+
+	     
+             
