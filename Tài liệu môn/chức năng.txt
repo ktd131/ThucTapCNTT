@@ -1,4 +1,4 @@
-Tên đề tài : Xây dựng website trao đổi giữa nhà trường THPT và gia đình
+﻿Tên đề tài : Xây dựng website trao đổi giữa nhà trường THPT và gia đình
 User : nhà trường : giáo viên, bộ phận quản lý; gia đình : gia đình
 Chức năng : gia đình :
 	      +	xem thời khóa biểu
@@ -22,4 +22,4 @@ Chức năng : gia đình :
   
 
 	     
-             
+             hoaianh2005@gmail
