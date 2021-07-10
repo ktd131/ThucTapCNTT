@@ -2,3 +2,15 @@ Phần 1 (Thông tin chung) : 2 người làm : Dương Anh Tuấn:1.1-1.4 Lê D
 Phần 2 và 5 (Sự cần thiết phải đầu tư - Dự kiến tiến độ thực hiện) : 1 người làm : Nguyễn Quang Linh 
 Phần 3 (Thuyết minh giải pháp kỹ thuật công nghệ được đề xuất): 3 người làm : Trần Văn Linh, Nguyễn Quốc Hiếu, Bùi Hoàng Lam
 Phần 4 (Dự đoán chi tiết): 1 người : Lê Minh Hiếu
+
+Phân công phần 4 :
+4.1 : Lê Hiếu
+4.2 : 4.2.1 : Trần Văn Linh
+      4.2.2 : Quốc Hiếu
+      4.2.3 : Quốc Hiếu
+      4.2.4 : Đạt
+      4.2.5 : Đạt
+      4.2.6 : Lê Hiếu
+      4.2.7 : Lê Hiếu
+      4.2.8 : Lê Hiếu
+
