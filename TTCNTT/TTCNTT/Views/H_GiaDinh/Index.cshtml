@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using TTCNTT.DB.EF
+@model IEnumerable<THONGTINTRAODOICUAGIADINH>
+<style>
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #15657c;
+        border-radius: 5px;
+    }
+
+    button:focus {
+        outline: 0 !important;
+    }
+
+    #maintop {
+        width: 400px;
+        height: 380px;
+        border: 3px solid #15657c;
+        margin: 38px auto 0 auto;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        overflow-y: scroll;
+    }
+
+    #mainbottom {
+        width: 400px;
+        height: 60px;
+        border: 3px solid #15657c;
+        border-top: 0px;
+        margin: 0 auto 38px auto;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        background-color: #27b3db;
+    }
+
+    body {
+        font-family: 'Serif';
+    }
+
+    #textInput {
+        width: 19rem;
+        margin-left: 25px;
+        margin-top: 10px;
+        border-radius: 11px;
+    }
+
+    .mainText {
+        width: fit-content;
+        max-width: 350px;
+        margin-left: 20px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        word-wrap: break-word;
+        background-color: #27b3db;
+        border-radius: 10px;
+        padding: 5px;
+        color: white;
+    }
+</style>
+<div style="border:1px solid #dee2e6;border-bottom:none;color:#003879;height:2.5rem;padding-left:2px;">
+    <div>NHẮN TIN TRAO ĐỔI VỚI NHÀ TRƯỜNG</div>
+    <div id="textAlert" style="display:none;">@ViewBag.text</div>
+</div>
+<div style="border:1px solid #dee2e6">
+
+    <button type="button" class="btn" style="float:right;"><i class='fas fa-times' style="margin:0 2px;color:red" id="btnThoat"></i></button>
+</div>
+<div>
+    <div id="maintop">
+        @foreach (var item in Model)
+        {
+            <div class="mainText">@item.noidung</div>
+           
+        }
+        </div>
+    <div id="mainbottom">
+        <form>
+            <div style="float:left">
+                <input type="text" class="form-control" id="textInput" />
+            </div>
+            <div style="float:right;">
+                <button type="submit" style="background-color:#27b3db;border: none;border-radius:10px;"><i class='far fa-paper-plane' style='margin-right: 10px; margin-top: 8px; font-size: 36px;'></i></button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#btnThoat').click(function () {
+            location.href = "https://localhost:44314/";
+        });
+    });
+
+
+</script>
+

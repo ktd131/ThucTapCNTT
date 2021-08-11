@@ -15,7 +15,7 @@ namespace TTCNTT.DB.EF
         [Column(TypeName = "date")]
         public DateTime? ngaythi { get; set; }
 
-        public TimeSpan? giothi { get; set; }
+        public string giothi { get; set; }
 
         public int? idmonhoc { get; set; }
 

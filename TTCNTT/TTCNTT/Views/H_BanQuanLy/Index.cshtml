@@ -1,0 +1,339 @@
+﻿@using TTCNTT.DB.DTO
+@model IEnumerable<LichThiDTO>
+@using PagedList.Mvc
+@{ var i = 0;}
+<style>
+    button:focus {
+        outline: 0 !important;
+    }
+
+    body {
+        font-family: 'Serif';
+    }
+
+    #hiddenThem {
+        width: 1000px;
+        height: 400px;
+        border: 1px solid #dee2e6;
+        display: none;
+        position: absolute;
+        z-index: 1000;
+        background-color: white;
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    #hiddenSua {
+        width: 1000px;
+        height: 400px;
+        border: 1px solid #dee2e6;
+        display: none;
+        position: absolute;
+        z-index: 1000;
+        background-color: white;
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .row {
+        margin-bottom: 5px;
+    }
+</style>
+<div class="container">
+    <div id="hiddenThem">
+        <div style="border:1px solid #dee2e6;color:#003879;height:2.5rem;padding-left:2px;">
+            THÊM
+        </div>
+        @using (Html.BeginForm("AddLichThi", "H_BanQuanLy", FormMethod.Post))//(action,controller)
+        {
+            <div style="border-bottom: 1px solid #dee2e6">
+                <button type="submit" class="btn" onclick="return confirm('Bạn có muốn lưu không')"><i class='far fa-clipboard' style="margin:0 2px"></i>Lưu</button>
+                <button type="button" class="btn" style="float:right;" id="btnThemDong"><i class='fas fa-times' style="margin:0 2px;color:red"></i></button>
+            </div>
+            <div style="padding:5px">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Chọn môn học</label>
+                            <div class="col-8">
+                                <select class="form-control" name="idmonhoc" required>
+                                    <option>Lựa chọn môn học</option>
+                                    @foreach (var item in ViewBag.ListMH)
+                                    {
+                                        <option value="@item.idmonhoc">@item.tenmonhoc</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Chọn học kỳ</label>
+                            <div class="col-8">
+                                <select class="form-control" name="idhocky" required>
+                                    <option>Lựa chọn học kỳ</option>
+                                    @foreach (var item in ViewBag.ListHK)
+                                    {
+                                        <option value="@item.idhocky">@item.tenhocky</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Giờ thi</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="giothi" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Ngày thi</label>
+                            <div class="col-8">
+                                <input type="date" class="form-control" name="ngaythi" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+    <div id="hiddenSua">
+        <div style="border:1px solid #dee2e6;color:#003879;height:2.5rem;padding-left:2px;">
+            SỬA
+        </div>
+        @using (Html.BeginForm("EditLichThi", "H_BanQuanLy", FormMethod.Post))//(action,controller)
+        {
+            <div style="border-bottom: 1px solid #dee2e6">
+                <button type="submit" class="btn" onclick="return confirm('Bạn có muốn lưu không')"><i class='far fa-clipboard' style="margin:0 2px"></i>Lưu</button>
+                <button type="button" class="btn" style="float:right;" id="btnSuaDong"><i class='fas fa-times' style="margin:0 2px;color:red"></i></button>
+            </div>
+            <div style="padding:5px">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Chọn môn học</label>
+                            <div class="col-8">
+                                <select class="form-control" name="idmonhoc" id="SuaMH" required>
+                                    @foreach (var item in ViewBag.ListMH)
+                                    {
+                                        <option value="@item.idmonhoc">@item.tenmonhoc</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Chọn học kỳ</label>
+                            <div class="col-8">
+                                <select class="form-control" name="idhocky" id="SuaHK" required>
+                                    @foreach (var item in ViewBag.ListHK)
+                                    {
+                                        <option value="@item.idhocky">@item.tenhocky</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Giờ thi</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="giothi" id="gt" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Ngày thi</label>
+                            <div class="col-8">
+                                <input type="date" class="form-control" name="ngaythi" id="nt" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10">
+                            <input type="hidden" class="form-control" name="idlichthi" id="idlichthi" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+    <div style="border:1px solid #dee2e6;border-bottom:none;color:#003879;height:2.5rem;padding-left:2px;">
+        <div> QUẢN LÝ LỊCH THI</div>
+        <div id="textAlert" style="display:none;">@ViewBag.text</div>
+    </div>
+    <div style="border:1px solid #dee2e6">
+        <button type="button" class="btn" id="btnThem"><i class='far fa-file' style="margin:0 2px"></i>Thêm</button>
+        <button type="button" class="btn" onclick="fnExcelReport()"><i id="btnExcel" class="fa fa-file-excel">Export</i></button>
+        <button type="button" class="btn" style="float:right;"><i class='fas fa-times' style="margin:0 2px;color:red" id="btnThoat"></i></button>
+    </div>
+    <iframe id="txtArea1" style="display:none"></iframe>
+    <table class="table table-hover table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã lịch thi</th>
+                <th>Môn học</th>
+                <th>Học kỳ</th>
+                <th>Năm học</th>
+                <th>Ngày thi</th>
+                <th>Giờ thi</th>
+                <th>Xử lý</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    @{i++;}
+                    <td>@i</td>
+                    <td>@item.idlichthi</td>
+                    <td>@item.tenmonhoc</td>
+                    <td>@item.tenhocky</td>
+                    <td>@item.namhoc</td>
+                    <td>@item.ngaythi</td>
+                    <td>@item.giothi</td>
+                    <td>
+                        <a href="?idmh=@item.idmonhoc&mh=@item.tenmonhoc&idhk=@item.idhocky&hk=@item.tenhocky&nt=@item.ngaythi&gt=@item.giothi&idlichthi=@item.idlichthi"><i class='far fa-edit' style="margin:0 2px"></i>Sửa</a>
+                        |<a href="/H_BanQuanLy/Del?idlichthi=@item.idlichthi" onclick="return confirm('Bạn có muốn xóa không')"><i class='far fa-trash-alt' style="margin:0 2px"></i>Xóa</a>
+
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    <table class="table table-hover table-striped table-bordered" style="width:100%;display:none;" id="datatable">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã lịch thi</th>
+                <th>Môn học</th>
+                <th>Học kỳ</th>
+                <th>Năm học</th>
+                <th>Ngày thi</th>
+                <th>Giờ thi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr>
+                    @{i++;}
+                    <td>@i</td>
+                    <td>@item.idlichthi</td>
+                    <td>@item.tenmonhoc</td>
+                    <td>@item.tenhocky</td>
+                    <td>@item.namhoc</td>
+                    <td>@item.ngaythi</td>
+                    <td>@item.giothi</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    <div class="col-sm-7">
+        <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+            @Html.PagedListPager(Model, page => Url.Action("Productlist", new { page, @searchString = @ViewBag.searchString }))
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#btnThem').click(function () {
+            $('#hiddenThem').show();
+        });
+        $('#btnThemDong').click(function () {
+            $('#hiddenThem').hide();
+        });
+        $('#btnSuaDong').click(function () {
+            $('#hiddenSua').hide();
+        });
+        $('#btnThoat').click(function () {
+            location.href = "https://localhost:44314/";
+        });
+        if ($('#textAlert').text() != '') {
+            alert($('#textAlert').text());
+        }
+        var searchParams = new URLSearchParams(window.location.search);
+        var idmh = searchParams.get('idmh');
+        var mh = searchParams.get('mh');
+        var idhk = searchParams.get('idhk');
+        var hk = searchParams.get('hk');
+        var nt = searchParams.get('nt');
+        var gt = searchParams.get('gt');
+        var id = searchParams.get('idlichthi');
+        if (idmh != null && idhk != null) {
+            let nts = nt.split(' ');
+            let times = nts[0].split('/');
+            if (times[0].length < 2) {
+                times[0] = '0' + times[0];
+            }
+            if (times[1].length < 2) {
+                times[1] = '0' + times[1];
+            }
+            let getnt = times[2] + '-' + times[0] + '-' + times[1];
+            $('#hiddenSua').show();
+            $('#SuaMH').prepend('<option selected value="' + idmh + '">' + mh + '</option>');
+            $('#SuaHK').prepend('<option selected value="' + idhk + '">' + hk + '</option>');
+            $('#nt').attr('value', getnt);
+            $('#gt').attr('value', gt);
+            $('#idlichthi').attr('value', id);
+        };
+    });
+
+    ///export excel
+    function fnExcelReport() {
+        var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+        var textRange; var j = 0;
+        tab = document.getElementById('datatable'); // id of table
+
+        for (j = 0; j < tab.rows.length; j++) {
+            tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+            //tab_text=tab_text+"</tr>";
+        }
+
+        tab_text = tab_text + "</table>";
+        tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+        tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+        tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+        {
+            txtArea1.document.open("txt/html", "replace");
+            txtArea1.document.write(tab_text);
+            txtArea1.document.close();
+            txtArea1.focus();
+            sa = txtArea1.document.execCommand("SaveAs", true, "Data.xls");
+        }
+        else                 //other browser not tested on IE 11
+            sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+        return (sa);
+    }
+
+</script>

@@ -52,6 +52,12 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -129,7 +135,35 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\H_BanQuanLyController.cs" />
+    <Compile Include="Controllers\H_GiaDinhController.cs" />
+    <Compile Include="Controllers\H_GiaoVienController.cs" />
+    <Compile Include="DB\Dao\H_BanQuanLyDao.cs" />
+    <Compile Include="DB\Dao\H_GiaDinhDao.cs" />
+    <Compile Include="DB\Dao\H_GiaoVienDao.cs" />
+    <Compile Include="DB\DTO\BangDiemDTO.cs" />
+    <Compile Include="DB\DTO\LichThiDTO.cs" />
+    <Compile Include="DB\EF\BANGDIEM.cs" />
+    <Compile Include="DB\EF\CHITIETBANGDIEM.cs" />
+    <Compile Include="DB\EF\CHITIETLOPHOCSINH.cs" />
+    <Compile Include="DB\EF\CHITIETTHOIKHOABIEU.cs" />
+    <Compile Include="DB\EF\DANHGIAKETQUA.cs" />
+    <Compile Include="DB\EF\DANHGIAKETQUACHITIET.cs" />
     <Compile Include="DB\EF\DBContext.cs" />
+    <Compile Include="DB\EF\HOCKY.cs" />
+    <Compile Include="DB\EF\HOCSINH.cs" />
+    <Compile Include="DB\EF\KETQUARENLUYENCHUNG.cs" />
+    <Compile Include="DB\EF\LICHSUNGHIHOC.cs" />
+    <Compile Include="DB\EF\LICHTHI.cs" />
+    <Compile Include="DB\EF\LOP.cs" />
+    <Compile Include="DB\EF\MONHOC.cs" />
+    <Compile Include="DB\EF\NGUOIDUNG.cs" />
+    <Compile Include="DB\EF\NHOMNGUOIDUNG.cs" />
+    <Compile Include="DB\EF\QUYEN.cs" />
+    <Compile Include="DB\EF\THOIKHOABIEU.cs" />
+    <Compile Include="DB\EF\THONGTINPHANHOI.cs" />
+    <Compile Include="DB\EF\THONGTINTRAODOICUAGIADINH.cs" />
+    <Compile Include="DB\EF\TINTUC.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -149,6 +183,8 @@
     <Content Include="Assets\css\responsive.css" />
     <Content Include="Assets\css\style.css" />
     <Content Include="Assets\css\superslides.css" />
+    <Content Include="Assets\dist\jquery.table2excel.js" />
+    <Content Include="Assets\dist\jquery.table2excel.min.js" />
     <Content Include="Assets\images\about-img.jpg" />
     <Content Include="Assets\images\all-bg-title.jpg" />
     <Content Include="Assets\images\apple-touch-icon.png" />
@@ -208,8 +244,48 @@
     <Content Include="Assets\js\jquery-ui.js" />
     <Content Include="Assets\js\jquery.nicescroll.min.js" />
     <Content Include="Assets\js\jquery.superslides.min.js" />
+    <Content Include="Assets\js\jquery.table2excel.min.js" />
     <Content Include="Assets\js\owl.carousel.min.js" />
     <Content Include="Assets\js\popper.min.js" />
+    <Content Include="Assets\kendo\animate.css" />
+    <Content Include="Assets\kendo\baguetteBox.min.css" />
+    <Content Include="Assets\kendo\bootstrap.min.css" />
+    <Content Include="Assets\kendo\Bootstrap\editor.png" />
+    <Content Include="Assets\kendo\Bootstrap\imagebrowser.png" />
+    <Content Include="Assets\kendo\Bootstrap\indeterminate.gif" />
+    <Content Include="Assets\kendo\Bootstrap\loading-image.gif" />
+    <Content Include="Assets\kendo\Bootstrap\loading.gif" />
+    <Content Include="Assets\kendo\Bootstrap\loading_2x.gif" />
+    <Content Include="Assets\kendo\Bootstrap\markers.png" />
+    <Content Include="Assets\kendo\Bootstrap\markers_2x.png" />
+    <Content Include="Assets\kendo\Bootstrap\slider-h.gif" />
+    <Content Include="Assets\kendo\Bootstrap\slider-v.gif" />
+    <Content Include="Assets\kendo\Bootstrap\sprite.png" />
+    <Content Include="Assets\kendo\Bootstrap\sprite_2x.png" />
+    <Content Include="Assets\kendo\Bootstrap\sprite_kpi.png" />
+    <Content Include="Assets\kendo\Bootstrap\sprite_kpi_2x.png" />
+    <Content Include="Assets\kendo\classic.css" />
+    <Content Include="Assets\kendo\classic.date.css" />
+    <Content Include="Assets\kendo\classic.time.css" />
+    <Content Include="Assets\kendo\custom.css" />
+    <Content Include="Assets\kendo\font-awesome.min.css" />
+    <Content Include="Assets\kendo\fonts\DejaVu\LICENSE.txt" />
+    <Content Include="Assets\kendo\fonts\glyphs\KendoUIGlyphs.svg" />
+    <Content Include="Assets\kendo\fonts\glyphs\WebComponentsIcons.svg" />
+    <Content Include="Assets\kendo\images\back.png" />
+    <Content Include="Assets\kendo\images\kendoui.svg" />
+    <Content Include="Assets\kendo\images\wp8_icons.png" />
+    <Content Include="Assets\kendo\images\wp8_inverseicons.png" />
+    <Content Include="Assets\kendo\kendo.bootstrap-v4.min.css" />
+    <Content Include="Assets\kendo\kendo.bootstrap.min.css" />
+    <Content Include="Assets\kendo\kendo.bootstrap.mobile.min.css" />
+    <Content Include="Assets\kendo\kendo.common-bootstrap.min.css" />
+    <Content Include="Assets\kendo\kendo.common.min.css" />
+    <Content Include="Assets\kendo\kendo.default.min.css" />
+    <Content Include="Assets\kendo\kendo.material-v2.min.css.css" />
+    <Content Include="Assets\kendo\responsive.css" />
+    <Content Include="Assets\kendo\style.css" />
+    <Content Include="Assets\kendo\superslides.css" />
     <Content Include="Assets\webfonts\fa-brands-400.svg" />
     <Content Include="Assets\webfonts\fa-regular-400.svg" />
     <Content Include="Assets\webfonts\fa-solid-900.svg" />
@@ -217,6 +293,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -235,6 +312,27 @@
     <Content Include="Assets\webfonts\fa-solid-900.ttf" />
     <Content Include="Assets\webfonts\fa-solid-900.woff" />
     <Content Include="Assets\webfonts\fa-solid-900.woff2" />
+    <Content Include="Assets\kendo\fonts\DejaVu\DejaVuSans-Bold.ttf" />
+    <Content Include="Assets\kendo\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
+    <Content Include="Assets\kendo\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
+    <Content Include="Assets\kendo\fonts\DejaVu\DejaVuSans-Oblique.ttf" />
+    <Content Include="Assets\kendo\fonts\DejaVu\DejaVuSans.ttf" />
+    <Content Include="Assets\kendo\fonts\DejaVu\DejaVuSansMono-Bold.ttf" />
+    <Content Include="Assets\kendo\fonts\DejaVu\DejaVuSansMono-BoldOblique.ttf" />
+    <Content Include="Assets\kendo\fonts\DejaVu\DejaVuSansMono-Oblique.ttf" />
+    <Content Include="Assets\kendo\fonts\DejaVu\DejaVuSansMono.ttf" />
+    <Content Include="Assets\kendo\fonts\DejaVu\DejaVuSerif-Bold.ttf" />
+    <Content Include="Assets\kendo\fonts\DejaVu\DejaVuSerif-BoldItalic.ttf" />
+    <Content Include="Assets\kendo\fonts\DejaVu\DejaVuSerif-Italic.ttf" />
+    <Content Include="Assets\kendo\fonts\DejaVu\DejaVuSerif.ttf" />
+    <Content Include="Assets\kendo\fonts\glyphs\KendoUIGlyphs.eot" />
+    <Content Include="Assets\kendo\fonts\glyphs\KendoUIGlyphs.ttf" />
+    <Content Include="Assets\kendo\fonts\glyphs\KendoUIGlyphs.woff" />
+    <Content Include="Assets\kendo\fonts\glyphs\WebComponentsIcons.eot" />
+    <Content Include="Assets\kendo\fonts\glyphs\WebComponentsIcons.ttf" />
+    <Content Include="Assets\kendo\fonts\glyphs\WebComponentsIcons.woff" />
+    <Content Include="Assets\kendo\images\kendoui.ttf" />
+    <Content Include="Assets\kendo\images\kendoui.woff" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -260,11 +358,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\H_GiaoVien\Index.cshtml" />
+    <Content Include="Views\H_BanQuanLy\Index.cshtml" />
+    <Content Include="Views\H_GiaDinh\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Assets\fonts\" />
-    <Folder Include="DB\Dao\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,385 @@
+﻿@using TTCNTT.DB.DTO
+@model IEnumerable<BangDiemDTO>
+@{ var i = 0;}
+<style>
+    button:focus {
+        outline: 0 !important;
+    }
+
+    body {
+        font-family: 'Serif';
+    }
+
+    #hiddenThem {
+        width: 1000px;
+        height: 400px;
+        border: 1px solid #dee2e6;
+        display: none;
+        position: absolute;
+        z-index: 1000;
+        background-color: white;
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    #hiddenSua {
+        width: 1000px;
+        height: 400px;
+        border: 1px solid #dee2e6;
+        display: none;
+        position: absolute;
+        z-index: 1000;
+        background-color: white;
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .row
+    {
+        margin-bottom:5px;
+    }
+</style>
+<div class="container">
+    <div id="hiddenThem">
+        <div style="border:1px solid #dee2e6;color:#003879;height:2.5rem;padding-left:2px;">
+            THÊM
+        </div>
+        @using (Html.BeginForm("AddBangDiem", "H_GiaoVien", FormMethod.Post))//(action,controller)
+        {
+            <div style="border-bottom: 1px solid #dee2e6">
+                <button type="submit" class="btn"  onclick="return confirm('Bạn có muốn lưu không')"><i class='far fa-clipboard' style="margin:0 2px"></i>Lưu</button>
+                <button type="button" class="btn" style="float:right;" id="btnThemDong"><i class='fas fa-times' style="margin:0 2px;color:red"></i></button>
+            </div>
+            <div style="padding:5px">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Chọn môn học</label>
+                            <div class="col-8">
+                                <select class="form-control" name="idmonhoc" required>
+                                    <option>Lựa chọn môn học</option>
+                                    @foreach (var item in ViewBag.ListMH)
+                                    {
+                                        <option value="@item.idmonhoc">@item.tenmonhoc</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Chọn học sinh</label>
+                            <div class="col-8">
+                                <select class="form-control" name="idhocsinh" required>
+                                    <option>Lựa chọn học sinh</option>
+                                    @foreach (var item in ViewBag.ListHS)
+                                    {
+                                        <option value="@item.idhocsinh">@item.tenhocsinh</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <label class="col-4">Chọn học kỳ</label>
+                            <div class="col-8">
+                                <select class="form-control" name="idhocky" required>
+                                    <option>Lựa chọn học kỳ</option>
+                                    @foreach (var item in ViewBag.ListHK)
+                                    {
+                                        <option value="@item.idhocky">@item.tenhocky</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Điểm 15 phút lần 1</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="diem15phutlan1" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Điểm 15 phút lần 2</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="diem15phutlan2" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Điểm 45 phút lần 1</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="diem45phutlan1" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Điểm 45 phút lần 2</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="diem45phutlan2" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Điểm cuối kỳ</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="diemhocky" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Điểm tổng kết</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="tongkethocky" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <label class="col-2">Ghi chú</label>
+                    <div class="col-10">
+                        <input type="text" class="form-control" name="ghichu" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div id="hiddenSua">
+        <div style="border:1px solid #dee2e6;color:#003879;height:2.5rem;padding-left:2px;">
+            SỬA
+        </div>
+        @using (Html.BeginForm("EditBangDiem", "H_GiaoVien", FormMethod.Post))//(action,controller)
+        {
+            <div style="border-bottom: 1px solid #dee2e6">
+                <button type="submit" class="btn"  onclick="return confirm('Bạn có muốn lưu không')"><i class='far fa-clipboard' style="margin:0 2px"></i>Lưu</button>
+                <button type="button" class="btn" style="float:right;" id="btnSuaDong"><i class='fas fa-times' style="margin:0 2px;color:red"></i></button>
+            </div>
+            <div style="padding:5px">
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Chọn môn học</label>
+                            <div class="col-8">
+                                <select class="form-control" name="idmonhoc" id="SuaMH" required>
+                                    @foreach (var item in ViewBag.ListMH)
+                                    {
+                                        <option value="@item.idmonhoc">@item.tenmonhoc</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Chọn học sinh</label>
+                            <div class="col-8">
+                                <select class="form-control" name="idhocsinh" id="SuaHS" required>
+                                    @foreach (var item in ViewBag.ListHS)
+                                    {
+                                        <option value="@item.idhocsinh">@item.tenhocsinh</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="row">
+                            <label class="col-4">Chọn học kỳ</label>
+                            <div class="col-8">
+                                <select class="form-control" name="idhocky" id="SuaHK" required>
+                                    @foreach (var item in ViewBag.ListHK)
+                                    {
+                                        <option value="@item.idhocky">@item.tenhocky</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Điểm 15 phút lần 1</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="diem15phutlan1" id="d15p1" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Điểm 15 phút lần 2</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="diem15phutlan2" id="d15p2" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Điểm 45 phút lần 1</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="diem45phutlan1" id="d45p1" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Điểm 45 phút lần 2</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="diem45phutlan2" id="d45p2" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Điểm cuối kỳ</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="diemhocky" id="ck" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <label class="col-4">Điểm tổng kết</label>
+                            <div class="col-8">
+                                <input type="text" class="form-control" name="tongkethocky" id="tk" required />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <label class="col-2">Ghi chú</label>
+                    <div class="col-10">
+                        <input type="text" class="form-control" name="ghichu" id="gc" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-10">
+                        <input type="hidden" class="form-control" name="idbangdiem" id="idbangdiem" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div style="border:1px solid #dee2e6;border-bottom:none;color:#003879;height:2.5rem;padding-left:2px;">
+        <div> THÊM SỬA ĐIỂM HỌC SINH</div>
+        <div id="textAlert" style="display:none;">@ViewBag.text</div>
+        </div>
+        <div style="border:1px solid #dee2e6">
+            <button type="button" class="btn" id="btnThem"><i class='far fa-file' style="margin:0 2px"></i>Thêm</button>
+            <button type="button" class="btn" style="float:right;"><i class='fas fa-times' style="margin:0 2px;color:red" id="btnThoat"></i></button>
+        </div>
+
+        <table class="table table-hover table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã học sinh</th>
+                    <th>Tên học sinh</th>
+                    <th>Môn học</th>
+                    <th>Học kỳ</th>
+                    <th>Năm học</th>
+                    <th>Điểm tổng kết</th>
+                    <th>Ghi chú</th>
+                    <th>Xử lý</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+
+                <tr>
+                    @{i++;}
+                    <td>@i</td>
+                    <td>@item.idhocsinh</td>
+                    <td>@item.tenhocsinh</td>
+                    <td>@item.tenmonhoc</td>
+                    <td>@item.tenhocky</td>
+                    <td>@item.namhoc</td>
+                    <td>@item.tongkethocky</td>
+                    <td>@item.ghichu</td>
+                    <td><a href="?idmh=@item.idmonhoc&mh=@item.tenmonhoc&idhs=@item.idhocsinh&hs=@item.tenhocsinh&idhk=@item.idhocky&hk=@item.tenhocky&15p1=@item.diem15phutlan1&15p2=@item.diem15phutlan2&45p1=@item.diem45phutlan1&45p2=@item.diem45phutlan2&ck=@item.diemhocky&tk=@item.tongkethocky&gc=@item.ghichu&idbangdiem=@item.idbangdiem"><i class='far fa-edit' style="margin:0 2px"></i>Sửa</a>
+                    </td>
+
+                </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+
+<script>
+    $(document).ready(function () {
+        $('#btnThem').click(function () {
+            $('#hiddenThem').show();
+        });
+        $('#btnThemDong').click(function () {
+            $('#hiddenThem').hide();
+        });
+        $('#btnSuaDong').click(function () {
+            $('#hiddenSua').hide();
+        });
+        $('#btnThoat').click(function () {
+            location.href = "https://localhost:44314/";
+        });
+        if ($('#textAlert').text()!='') {
+            alert($('#textAlert').text());
+        }
+        var searchParams = new URLSearchParams(window.location.search);
+        var idmh = searchParams.get('idmh');
+        var mh = searchParams.get('mh');
+        var idhs = searchParams.get('idhs');
+        var hs = searchParams.get('hs');
+        var idhk = searchParams.get('idhk');
+        var hk = searchParams.get('hk');
+        var d15p1 = searchParams.get('15p1');
+        var d15p2 = searchParams.get('15p2');
+        var d45p1 = searchParams.get('45p1');
+        var d45p2 = searchParams.get('45p2');
+        var ck = searchParams.get('ck');
+        var tk = searchParams.get('tk');
+        var gc = searchParams.get('gc');
+        var id = searchParams.get('idbangdiem');
+        if (idmh != null && idhs != null && idhk != null) {
+            $('#hiddenSua').show();
+            $('#SuaMH').prepend('<option selected value="' + idmh + '">' + mh + '</option>');
+            $('#SuaHS').prepend('<option selected value="' + idhs + '">' + hs + '</option>');
+            $('#SuaHK').prepend('<option selected value="' + idhk + '">' + hk + '</option>');
+            $('#d15p1').attr('value', d15p1);
+            $('#d15p2').attr('value', d15p2);
+            $('#d45p1').attr('value', d45p1);
+            $('#d45p2').attr('value', d45p2);
+            $('#ck').attr('value', ck);
+            $('#tk').attr('value', tk);
+            $('#gc').attr('value', gc);
+            $('#idbangdiem').attr('value',id);
+        };
+    });
+</script>
