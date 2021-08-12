@@ -1,5 +1,5 @@
 ﻿@using TTCNTT.DB.DTO
-@model IEnumerable<LichThiDTO>
+@model PagedList.PagedList<LichThiDTO>
 @using PagedList.Mvc
 @{ var i = 0;}
 <style>
@@ -43,6 +43,9 @@
 
     .row {
         margin-bottom: 5px;
+    }
+    select.form-control:not([size]):not([multiple]) {
+        height: auto !important;
     }
 </style>
 <div class="container">
@@ -253,11 +256,7 @@
             }
         </tbody>
     </table>
-    <div class="col-sm-7">
-        <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
-            @Html.PagedListPager(Model, page => Url.Action("Productlist", new { page, @searchString = @ViewBag.searchString }))
-        </div>
-    </div>
+    @Html.PagedListPager(Model, page => Url.Action("index", new { page }))
 </div>
 <script>
     $(document).ready(function () {

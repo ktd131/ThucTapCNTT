@@ -11,7 +11,7 @@ namespace TTCNTT.Controllers
     public class H_BanQuanLyController : Controller
     {
         // GET: H_BanQuanLy
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
             ViewBag.text = "";
             if (TempData.ContainsKey("check"))
@@ -19,7 +19,7 @@ namespace TTCNTT.Controllers
                 ViewBag.text = TempData["check"].ToString();
             }
             var dao = new H_BanQuanLyDao();
-            var model = dao.ListLichThi();
+            var model = dao.ListLichThi(page, pageSize);
             ViewBag.ListMH = dao.ListMonHoc();
             ViewBag.ListHK = dao.ListHocKy();
             return View(model);

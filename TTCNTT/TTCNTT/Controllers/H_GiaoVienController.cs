@@ -10,7 +10,7 @@ namespace TTCNTT.Controllers
     public class H_GiaoVienController : Controller
     {
         // GET: H_GiaoVien
-        public ActionResult Index()
+        public ActionResult Index(int page=1,int pageSize=10)
         {
             ViewBag.text = "";
             if(TempData.ContainsKey("check"))
@@ -18,7 +18,7 @@ namespace TTCNTT.Controllers
                 ViewBag.text = TempData["check"].ToString();
             }    
             var dao = new H_GiaoVienDao();
-            var model = dao.ListDiemHocSinh();
+            var model = dao.ListDiemHocSinh(page,pageSize);
             ViewBag.ListHS = dao.ListHocSinh();
             ViewBag.ListMH = dao.ListMonHoc();
             ViewBag.ListHK = dao.ListHocKy();
@@ -42,7 +42,7 @@ namespace TTCNTT.Controllers
                 }
 
             }
-             return RedirectToAction("index", "H_GiaoVien"); ;
+             return RedirectToAction("index", "H_GiaoVien"); 
         }
         [HttpPost]
         public ActionResult EditBangDiem(int idmonhoc, int idhocsinh, int idhocky, double diem15phutlan1, double diem15phutlan2, double diem45phutlan1, double diem45phutlan2, double diemhocky, string tongkethocky, string ghichu,int idbangdiem)

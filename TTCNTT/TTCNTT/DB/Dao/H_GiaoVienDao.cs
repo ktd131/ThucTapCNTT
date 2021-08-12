@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace TTCNTT.DB.Dao
         {
             return db.MONHOCs.ToList();
         }
-        public IEnumerable<BangDiemDTO> ListDiemHocSinh()
+        public IEnumerable<BangDiemDTO> ListDiemHocSinh(int page,int pageSize)
         {
             var model = from a in db.BANGDIEMs
                         join b in db.HOCSINHs on a.idhocsinh equals b.idhocsinh
@@ -53,7 +54,7 @@ namespace TTCNTT.DB.Dao
                             diemhocky=e.diemhocky
                             
                         };
-            return model.ToList();
+            return model.OrderByDescending(x => x.idbangdiem).ToPagedList(page, pageSize); ;
         }
         public bool addBangDiem(int idmonhoc, int idhocsinh, int idhocky, double diem15phutlan1, double diem15phutlan2, double diem45phutlan1, double diem45phutlan2, double diemhocky, string tongkethocky, string ghichu)
         {

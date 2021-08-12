@@ -1,5 +1,7 @@
 ﻿@using TTCNTT.DB.DTO
-@model IEnumerable<BangDiemDTO>
+@using PagedList.Mvc
+@model PagedList.IPagedList<BangDiemDTO>
+
 @{ var i = 0;}
 <style>
     button:focus {
@@ -24,6 +26,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
+
     #hiddenSua {
         width: 1000px;
         height: 400px;
@@ -38,9 +41,12 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-    .row
-    {
-        margin-bottom:5px;
+
+    .row {
+        margin-bottom: 5px;
+    }
+    select.form-control:not([size]):not([multiple]) {
+        height:auto !important;
     }
 </style>
 <div class="container">
@@ -51,7 +57,7 @@
         @using (Html.BeginForm("AddBangDiem", "H_GiaoVien", FormMethod.Post))//(action,controller)
         {
             <div style="border-bottom: 1px solid #dee2e6">
-                <button type="submit" class="btn"  onclick="return confirm('Bạn có muốn lưu không')"><i class='far fa-clipboard' style="margin:0 2px"></i>Lưu</button>
+                <button type="submit" class="btn" onclick="return confirm('Bạn có muốn lưu không')"><i class='far fa-clipboard' style="margin:0 2px"></i>Lưu</button>
                 <button type="button" class="btn" style="float:right;" id="btnThemDong"><i class='fas fa-times' style="margin:0 2px;color:red"></i></button>
             </div>
             <div style="padding:5px">
@@ -172,7 +178,7 @@
         @using (Html.BeginForm("EditBangDiem", "H_GiaoVien", FormMethod.Post))//(action,controller)
         {
             <div style="border-bottom: 1px solid #dee2e6">
-                <button type="submit" class="btn"  onclick="return confirm('Bạn có muốn lưu không')"><i class='far fa-clipboard' style="margin:0 2px"></i>Lưu</button>
+                <button type="submit" class="btn" onclick="return confirm('Bạn có muốn lưu không')"><i class='far fa-clipboard' style="margin:0 2px"></i>Lưu</button>
                 <button type="button" class="btn" style="float:right;" id="btnSuaDong"><i class='fas fa-times' style="margin:0 2px;color:red"></i></button>
             </div>
             <div style="padding:5px">
@@ -291,29 +297,29 @@
     <div style="border:1px solid #dee2e6;border-bottom:none;color:#003879;height:2.5rem;padding-left:2px;">
         <div> THÊM SỬA ĐIỂM HỌC SINH</div>
         <div id="textAlert" style="display:none;">@ViewBag.text</div>
-        </div>
-        <div style="border:1px solid #dee2e6">
-            <button type="button" class="btn" id="btnThem"><i class='far fa-file' style="margin:0 2px"></i>Thêm</button>
-            <button type="button" class="btn" style="float:right;"><i class='fas fa-times' style="margin:0 2px;color:red" id="btnThoat"></i></button>
-        </div>
+    </div>
+    <div style="border:1px solid #dee2e6">
+        <button type="button" class="btn" id="btnThem"><i class='far fa-file' style="margin:0 2px"></i>Thêm</button>
+        <button type="button" class="btn" style="float:right;"><i class='fas fa-times' style="margin:0 2px;color:red" id="btnThoat"></i></button>
+    </div>
 
-        <table class="table table-hover table-striped table-bordered" style="width:100%">
-            <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Mã học sinh</th>
-                    <th>Tên học sinh</th>
-                    <th>Môn học</th>
-                    <th>Học kỳ</th>
-                    <th>Năm học</th>
-                    <th>Điểm tổng kết</th>
-                    <th>Ghi chú</th>
-                    <th>Xử lý</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+    <table class="table table-hover table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Mã học sinh</th>
+                <th>Tên học sinh</th>
+                <th>Môn học</th>
+                <th>Học kỳ</th>
+                <th>Năm học</th>
+                <th>Điểm tổng kết</th>
+                <th>Ghi chú</th>
+                <th>Xử lý</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
 
                 <tr>
                     @{i++;}
@@ -325,15 +331,17 @@
                     <td>@item.namhoc</td>
                     <td>@item.tongkethocky</td>
                     <td>@item.ghichu</td>
-                    <td><a href="?idmh=@item.idmonhoc&mh=@item.tenmonhoc&idhs=@item.idhocsinh&hs=@item.tenhocsinh&idhk=@item.idhocky&hk=@item.tenhocky&15p1=@item.diem15phutlan1&15p2=@item.diem15phutlan2&45p1=@item.diem45phutlan1&45p2=@item.diem45phutlan2&ck=@item.diemhocky&tk=@item.tongkethocky&gc=@item.ghichu&idbangdiem=@item.idbangdiem"><i class='far fa-edit' style="margin:0 2px"></i>Sửa</a>
+                    <td>
+                        <a href="?idmh=@item.idmonhoc&mh=@item.tenmonhoc&idhs=@item.idhocsinh&hs=@item.tenhocsinh&idhk=@item.idhocky&hk=@item.tenhocky&15p1=@item.diem15phutlan1&15p2=@item.diem15phutlan2&45p1=@item.diem45phutlan1&45p2=@item.diem45phutlan2&ck=@item.diemhocky&tk=@item.tongkethocky&gc=@item.ghichu&idbangdiem=@item.idbangdiem"><i class='far fa-edit' style="margin:0 2px"></i>Sửa</a>
                     </td>
 
                 </tr>
 
-                }
-            </tbody>
-        </table>
-    </div>
+            }
+        </tbody>
+    </table>
+            @Html.PagedListPager(Model, page => Url.Action("index", new { page }))
+</div>
 
 <script>
     $(document).ready(function () {
@@ -349,7 +357,7 @@
         $('#btnThoat').click(function () {
             location.href = "https://localhost:44314/";
         });
-        if ($('#textAlert').text()!='') {
+        if ($('#textAlert').text() != '') {
             alert($('#textAlert').text());
         }
         var searchParams = new URLSearchParams(window.location.search);
@@ -379,7 +387,7 @@
             $('#ck').attr('value', ck);
             $('#tk').attr('value', tk);
             $('#gc').attr('value', gc);
-            $('#idbangdiem').attr('value',id);
+            $('#idbangdiem').attr('value', id);
         };
     });
 </script>

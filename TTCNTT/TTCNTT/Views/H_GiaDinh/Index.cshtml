@@ -45,7 +45,7 @@
     }
 
     #textInput {
-        width: 19rem;
+        width: 29rem;
         margin-left: 25px;
         margin-top: 10px;
         border-radius: 11px;
@@ -77,18 +77,19 @@
         @foreach (var item in Model)
         {
             <div class="mainText">@item.noidung</div>
-           
+
         }
-        </div>
+    </div>
     <div id="mainbottom">
-        <form>
+        @using (Html.BeginForm("Index", "H_GiaDinh", FormMethod.Post))
+        {
             <div style="float:left">
-                <input type="text" class="form-control" id="textInput" />
+                <input type="text" class="form-control" id="textInput" name="noidung" required />
             </div>
             <div style="float:right;">
-                <button type="submit" style="background-color:#27b3db;border: none;border-radius:10px;"><i class='far fa-paper-plane' style='margin-right: 10px; margin-top: 8px; font-size: 36px;'></i></button>
+                <button type="submit" style="background-color:#27b3db;border: none;border-radius:10px;" onclick="return confirm('Bạn có muốn gửi không')"><i class='far fa-paper-plane' style='margin-right: 10px; margin-top: 8px; font-size: 36px;'></i></button>
             </div>
-        </form>
+        }
     </div>
 </div>
 <script>
@@ -96,8 +97,12 @@
         $('#btnThoat').click(function () {
             location.href = "https://localhost:44314/";
         });
+        if ($('#textAlert').text() != '') {
+            alert($('#textAlert').text());
+        }
     });
-
-
+    var messageBody = document.querySelector('#maintop');
+    messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+    
 </script>
 

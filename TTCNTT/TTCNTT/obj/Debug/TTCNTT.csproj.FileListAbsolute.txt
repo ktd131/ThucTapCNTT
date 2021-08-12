@@ -81,3 +81,7 @@ D:\visual\TTCNTT\TTCNTT\bin\EntityFramework.dll
 D:\visual\TTCNTT\TTCNTT\bin\EntityFramework.SqlServer.dll
 D:\visual\TTCNTT\TTCNTT\bin\EntityFramework.xml
 D:\visual\TTCNTT\TTCNTT\bin\EntityFramework.SqlServer.xml
+D:\visual\TTCNTT\TTCNTT\bin\PagedList.dll
+D:\visual\TTCNTT\TTCNTT\bin\PagedList.Mvc.dll
+D:\visual\TTCNTT\TTCNTT\bin\PagedList.xml
+D:\visual\TTCNTT\TTCNTT\bin\PagedList.Mvc.xml

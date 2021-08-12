@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace TTCNTT.DB.Dao
         {
             return db.MONHOCs.ToList();
         }
-        public IEnumerable<LichThiDTO> ListLichThi()
+        public IEnumerable<LichThiDTO> ListLichThi(int page, int pageSize)
         {
             var model = from a in db.LICHTHIs
                         join b in db.MONHOCs on a.idmonhoc equals b.idmonhoc
@@ -41,7 +42,7 @@ namespace TTCNTT.DB.Dao
                             namhoc = c.namhoc
 
                         };
-            return model.ToList();
+            return model.OrderByDescending(x=>x.idlichthi).ToPagedList(page, pageSize);
         }
         public bool addLichThi(LICHTHI lt)
         {
