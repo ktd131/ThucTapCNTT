@@ -45,7 +45,6 @@
 </head>
 
 <body>
-
     <!-- Start Main Top -->
     <!-- Start Main Top -->
     <header class="main-header">
@@ -57,56 +56,64 @@
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fa fa-bars"></i>
                     </button>
-                    @*<a class="navbar-brand" href="index.html"><img src="~/Assets/images/logo.png" class="logo" alt=""></a>*@
+                    <img src="~/Assets/images/logo.png" height="65px" />
                 </div>
                 <!-- End Header Navigation -->
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="navbar-menu">
                     <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                         <li class="nav-item active"><a class="nav-link" href="/Home">Trang chủ</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">Giới thiệu</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/Home/Intro">Giới thiệu</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.html">Tin tức</a></li>
-                        @*Gia đình*@
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Xem thông tin</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="cart.html">Xem thông báo</a></li>
-                                <li><a href="checkout.html">Xem thời khóa biểu</a></li>
-                                <li><a href="my-account.html">Tra cứu thông tin</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="service.html">Nhắn tin</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact-us.html">Xin nghỉ học</a></li>
-                        @*Giáo viên*@
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Quản lý học sinh</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="cart.html">Điểm danh học sinh</a></li>
-                                <li><a href="checkout.html">Nhập và sửa điểm học sinh</a></li>
-                                <li><a href="my-account.html">Đánh giá học sinh hàng ngày</a></li>
-                                <li><a href="my-account.html">Quản lý đánh giá kết quả học tập cuối kỳ</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="service.html">Giải đáp thắc mắc</a></li>
-                        @*Ban quản lý*@
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Thông báo</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="cart.html">Thông báo kết quả học tập</a></li>
-                                <li><a href="checkout.html">Thông báo tình hình nghỉ học của học sinh</a></li>
-                                <li><a href="my-account.html">Thông báo TKB, lịch thi và các tin tức của nhà trường</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Quản lý</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="cart.html">Lập,sửa,xóa thời khóa biểu</a></li>
-                                <li><a href="checkout.html">Quản lý tin tức</a></li>
-                                <li><a href="my-account.html">Quản lý lịch thi</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="service.html">Giải đáp thắc mắc</a></li>
-                        <li class="nav-item"><a class="nav-link" href="service.html">Duyệt đơn xin nghỉ học</a></li>
+                        @{ if (@Session["Quyen"] == "quyengiadinh")
+                            {
+                                <li class="dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Xem thông tin</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="cart.html">Xem thông báo</a></li>
+                                        <li><a href="checkout.html">Xem thời khóa biểu</a></li>
+                                        <li><a href="my-account.html">Tra cứu thông tin</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="/H_GiaDinh">Nhắn tin</a></li>
+                                <li class="nav-item"><a class="nav-link" href="contact-us.html">Xin nghỉ học</a></li>
+
+                            }
+                        }
+                        @{ if (@Session["Quyen"] == "quyengiaovien")
+                            {
+                                <li class="dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Quản lý học sinh</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="cart.html">Điểm danh học sinh</a></li>
+                                        <li><a href="/H_GiaoVien">Nhập và sửa điểm học sinh</a></li>
+                                        <li><a href="my-account.html">Đánh giá học sinh hàng ngày</a></li>
+                                        <li><a href="my-account.html">Quản lý đánh giá kết quả học tập cuối kỳ</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="service.html">Giải đáp thắc mắc</a></li>
+                            } }
+                        @{ if (@Session["Quyen"] == "admin")
+                            {
+                                <li class="dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Thông báo</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="cart.html">Thông báo kết quả học tập</a></li>
+                                        <li><a href="checkout.html">Thông báo tình hình nghỉ học của học sinh</a></li>
+                                        <li><a href="my-account.html">Thông báo TKB, lịch thi và các tin tức của nhà trường</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Quản lý</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="cart.html">Lập,sửa,xóa thời khóa biểu</a></li>
+                                        <li><a href="checkout.html">Quản lý tin tức</a></li>
+                                        <li><a href="/H_BanQuanLy">Quản lý lịch thi</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="service.html">Giải đáp thắc mắc</a></li>
+                                <li class="nav-item"><a class="nav-link" href="service.html">Duyệt đơn xin nghỉ học</a></li>
+                                } }
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -222,9 +229,9 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-widget">
-                            <h4>About ThewayShop</h4>
+                            <h4>Về trường THPT Đống đa</h4>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                Trường THPT Đống Đa có bề dày tryền thống 60 năm xây dựng và trưởng thành.
                             </p>
                             <ul>
                                 <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
@@ -239,29 +246,27 @@
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-link">
-                            <h4>Information</h4>
+                            <h4>Thông tin</h4>
                             <ul>
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Customer Service</a></li>
-                                <li><a href="#">Our Sitemap</a></li>
-                                <li><a href="#">Terms &amp; Conditions</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Delivery Information</a></li>
+                                <li><a href="#">Giới thiệu</a></li>
+                                <li><a href="#">Dịch vụ</a></li>
+                                <li><a href="#">Chính sách</a></li>
+                               
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12 col-sm-12">
                         <div class="footer-link-contact">
-                            <h4>Contact Us</h4>
+                            <h4>Liên hệ với chúng tôi</h4>
                             <ul>
                                 <li>
-                                    <p><i class="fas fa-map-marker-alt"></i>Address: Michael I. Days 3756 <br>Preston Street Wichita,<br> KS 67213 </p>
+                                    <p><i class="fas fa-map-marker-alt"></i>Địa chỉ: Số 10 ngõ Quan Thổ 1, Tôn Đức Thắng, Đống Đa , Hà Nội </p>
                                 </li>
                                 <li>
-                                    <p><i class="fas fa-phone-square"></i>Phone: <a href="tel:+1-888705770">+1-888 705 770</a></p>
+                                    <p><i class="fas fa-phone-square"></i>Điện thoại:02438513691 / Fax: 02438513691</p>
                                 </li>
                                 <li>
-                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">contactinfo@gmail.com</a></p>
+                                    <p><i class="fas fa-envelope"></i>Email: <a href="mailto:contactinfo@gmail.com">c3dongda@hanoiedu.vn</a></p>
                                 </li>
                             </ul>
                         </div>
@@ -274,8 +279,8 @@
     <!-- Start copyright  -->
     <div class="footer-copyright">
         <p class="footer-company">
-            All Rights Reserved. &copy; 2018 <a href="#">ThewayShop</a> Design By :
-            <a href="https://html.design/">html design</a>
+            All Rights Reserved. &copy; 2021 <a href="#">THPT Dong Da</a> Design By :
+            <a href="https://html.design/">N4Team</a>
         </p>
     </div>
     <!-- End copyright  -->
@@ -298,6 +303,19 @@
     <script src="~/Assets/js/form-validator.min.js"></script>
     <script src="~/Assets/js/contact-form-script.js"></script>
     <script src="~/Assets/js/custom.js"></script>
+    @*<script>
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+        alert(getCookie("quyen"));
+    </script>*@
 </body>
 
 </html>

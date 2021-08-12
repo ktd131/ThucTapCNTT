@@ -10,13 +10,12 @@ namespace TTCNTT.Controllers
     {
         public ActionResult Index()
         {
+            Session.Add("Quyen", "quyengiaovien");
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Intro()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
