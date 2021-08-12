@@ -149,6 +149,13 @@
     <Compile Include="DB\EF\CHITIETTHOIKHOABIEU.cs" />
     <Compile Include="DB\EF\DANHGIAKETQUA.cs" />
     <Compile Include="DB\EF\DANHGIAKETQUACHITIET.cs" />
+    <Compile Include="Controllers\LamController.cs" />
+    <Compile Include="DB\EF\BANGDIEM.cs" />
+    <Compile Include="DB\EF\CHITIETBANGDIEM.cs" />
+    <Compile Include="DB\EF\CHITIETLOPHOCSINH.cs" />
+    <Compile Include="DB\EF\CHITIETTHOIKHOABIEU.cs" />
+    <Compile Include="DB\EF\DANHGIAKETQUA.cs" />
+    <Compile Include="DB\EF\DANHGIAKETQUACHITIET.cs" />
     <Compile Include="DB\EF\DBContext.cs" />
     <Compile Include="DB\EF\HOCKY.cs" />
     <Compile Include="DB\EF\HOCSINH.cs" />
@@ -167,6 +174,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LichSuNghiHocDto.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -361,11 +370,16 @@
     <Content Include="Views\H_GiaoVien\Index.cshtml" />
     <Content Include="Views\H_BanQuanLy\Index.cshtml" />
     <Content Include="Views\H_GiaDinh\Index.cshtml" />
+    <Content Include="Views\Lam\Create.cshtml" />
+    <Content Include="Views\Lam\Delete.cshtml" />
+    <Content Include="Views\Lam\Details.cshtml" />
+    <Content Include="Views\Lam\Edit.cshtml" />
+    <Content Include="Views\Lam\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Assets\fonts\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -10,7 +10,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Site Metas -->
-    <title>ThewayShop - Ecommerce Bootstrap 4 HTML Template</title>
+    <title>
+        Website trao đổi giữa nhà trường và gia đình học sinh
+    </title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -65,7 +67,7 @@
                         <li class="nav-item active"><a class="nav-link" href="/Home">Trang chủ</a></li>
                         <li class="nav-item"><a class="nav-link" href="/Home/Intro">Giới thiệu</a></li>
                         <li class="nav-item"><a class="nav-link" href="about.html">Tin tức</a></li>
-                        @{ if (@Session["Quyen"] == "quyengiadinh")
+                        @{ if (@Session["quyen"] != null && @Session["Quyen"].ToString() == "quyengiadinh")
                             {
                                 <li class="dropdown">
                                     <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Xem thông tin</a>
@@ -76,16 +78,16 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="/H_GiaDinh">Nhắn tin</a></li>
-                                <li class="nav-item"><a class="nav-link" href="contact-us.html">Xin nghỉ học</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/lam/create">Xin nghỉ học</a></li>
 
                             }
                         }
-                        @{ if (@Session["Quyen"] == "quyengiaovien")
+                        @{ if (@Session["quyen"] != null && @Session["Quyen"].ToString() == "quyengiaovien")
                             {
                                 <li class="dropdown">
                                     <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Quản lý học sinh</a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="cart.html">Điểm danh học sinh</a></li>
+                                        <li><a href="/lam/diemdanh">Điểm danh học sinh</a></li>
                                         <li><a href="/H_GiaoVien">Nhập và sửa điểm học sinh</a></li>
                                         <li><a href="my-account.html">Đánh giá học sinh hàng ngày</a></li>
                                         <li><a href="my-account.html">Quản lý đánh giá kết quả học tập cuối kỳ</a></li>
@@ -93,8 +95,28 @@
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="service.html">Giải đáp thắc mắc</a></li>
                             } }
-                        @{ if (@Session["Quyen"] == "admin")
+                        @{ if (@Session["quyen"] != null && @Session["Quyen"].ToString() == "admin")
                             {
+                                <li class="dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Xem thông tin</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="cart.html">Xem thông báo</a></li>
+                                        <li><a href="checkout.html">Xem thời khóa biểu</a></li>
+                                        <li><a href="my-account.html">Tra cứu thông tin</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="/H_GiaDinh">Nhắn tin</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/lam/create">Xin nghỉ học</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Quản lý học sinh</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="lam/diemdanh">Điểm danh học sinh</a></li>
+                                        <li><a href="/H_GiaoVien">Nhập và sửa điểm học sinh</a></li>
+                                        <li><a href="my-account.html">Đánh giá học sinh hàng ngày</a></li>
+                                        <li><a href="my-account.html">Quản lý đánh giá kết quả học tập cuối kỳ</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item"><a class="nav-link" href="service.html">Giải đáp thắc mắc</a></li>
                                 <li class="dropdown">
                                     <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Thông báo</a>
                                     <ul class="dropdown-menu">
@@ -112,8 +134,8 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="service.html">Giải đáp thắc mắc</a></li>
-                                <li class="nav-item"><a class="nav-link" href="service.html">Duyệt đơn xin nghỉ học</a></li>
-                                } }
+                                <li class="nav-item"><a class="nav-link" href="/lam">Duyệt đơn xin nghỉ học</a></li>
+                            } }
                     </ul>
                 </div>
                 <!-- /.navbar-collapse -->
@@ -122,41 +144,52 @@
                     <ul>
                         <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                         <li class="side-menu">
-                            <a href="#">
-                                <i class='fas fa-user-alt' style='font-size:24px'></i>
-                            </a>
+                            @if (Session["quyen"] == null)
+                            {
+                                <a href="/Home/Login">
+                                    <i class='fas fa-user-alt' style='font-size:24px'></i>
+                                </a>
+                            }
+                            else
+                            {
+                                
+                                <a href="/Home/Logout">
+                                    <i class='fas fa-user-alt' style='font-size:24px'></i>
+                                </a>
+                            }
+
                         </li>
                     </ul>
                 </div>
                 <!-- End Atribute Navigation -->
             </div>
             <!-- Start Side Menu -->
-            <div class="side">
-                <a href="#" class="close-side"><i class="fa fa-times"></i></a>
-                <li class="cart-box">
-                    <ul class="cart-list">
-                        <li>
-                            <a href="#" class="photo"><img src="~/Assets/images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Delica omtantur </a></h6>
-                            <p>1x - <span class="price">$80.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="~/Assets/images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Omnes ocurreret</a></h6>
-                            <p>1x - <span class="price">$60.00</span></p>
-                        </li>
-                        <li>
-                            <a href="#" class="photo"><img src="~/Assets/images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
-                            <h6><a href="#">Agam facilisis</a></h6>
-                            <p>1x - <span class="price">$40.00</span></p>
-                        </li>
-                        <li class="total">
-                            <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                            <span class="float-right"><strong>Total</strong>: $180.00</span>
-                        </li>
-                    </ul>
-                </li>
-            </div>
+            @*<div class="side">
+                    <a href="#" class="close-side"><i class="fa fa-times"></i></a>
+                    <li class="cart-box">
+                        <ul class="cart-list">
+                            <li>
+                                <a href="#" class="photo"><img src="~/Assets/images/img-pro-01.jpg" class="cart-thumb" alt="" /></a>
+                                <h6><a href="#">Delica omtantur </a></h6>
+                                <p>1x - <span class="price">$80.00</span></p>
+                            </li>
+                            <li>
+                                <a href="#" class="photo"><img src="~/Assets/images/img-pro-02.jpg" class="cart-thumb" alt="" /></a>
+                                <h6><a href="#">Omnes ocurreret</a></h6>
+                                <p>1x - <span class="price">$60.00</span></p>
+                            </li>
+                            <li>
+                                <a href="#" class="photo"><img src="~/Assets/images/img-pro-03.jpg" class="cart-thumb" alt="" /></a>
+                                <h6><a href="#">Agam facilisis</a></h6>
+                                <p>1x - <span class="price">$40.00</span></p>
+                            </li>
+                            <li class="total">
+                                <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                                <span class="float-right"><strong>Total</strong>: $180.00</span>
+                            </li>
+                        </ul>
+                    </li>
+                </div>*@
             <!-- End Side Menu -->
         </nav>
         <!-- End Navigation -->
@@ -174,7 +207,6 @@
     </div>
     <!-- End Top Search -->
     <!-- Start Slider -->
-   
     <!-- End Slider -->
     <!-- Start Categories  -->
     @RenderBody()
@@ -208,7 +240,7 @@
                                 <li><a href="#">Giới thiệu</a></li>
                                 <li><a href="#">Dịch vụ</a></li>
                                 <li><a href="#">Chính sách</a></li>
-                               
+
                             </ul>
                         </div>
                     </div>
@@ -261,18 +293,18 @@
     <script src="~/Assets/js/contact-form-script.js"></script>
     <script src="~/Assets/js/custom.js"></script>
     @*<script>
-        function getCookie(cname) {
-            var name = cname + "=";
-            var ca = document.cookie.split(';');
-            for (var i = 0; i < ca.length; i++) {
-                var c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1);
-                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') c = c.substring(1);
+                    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+                }
+                return "";
             }
-            return "";
-        }
-        alert(getCookie("quyen"));
-    </script>*@
+            alert(getCookie("quyen"));
+        </script>*@
 </body>
 
 </html>

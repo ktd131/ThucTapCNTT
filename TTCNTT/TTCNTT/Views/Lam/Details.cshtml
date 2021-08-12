@@ -1,0 +1,67 @@
+﻿@model TTCNTT.DB.EF.LICHSUNGHIHOC
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LICHSUNGHIHOC</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HOCSINH.tenhocsinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HOCSINH.tenhocsinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LOP.tenlop)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOP.tenlop)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lydo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lydo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trangthai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trangthai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cophep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cophep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngaynghi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngaynghi)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idlichsunghihoc }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
