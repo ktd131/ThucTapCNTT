@@ -47,7 +47,7 @@ namespace TTCNTT.DB.Dao
         public bool addLichThi(LICHTHI lt)
         {
 
-            int check = db.BANGDIEMs.Count(x => x.idmonhoc == lt.idlichthi && x.idhocky == lt.idlichthi);
+            int check = db.LICHTHIs.Count(x => x.idmonhoc == lt.idmonhoc && x.idhocky == lt.idhocky);
             if (check < 1)
             {
                 db.LICHTHIs.Add(lt);
