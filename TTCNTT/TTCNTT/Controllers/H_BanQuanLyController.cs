@@ -42,6 +42,10 @@ namespace TTCNTT.Controllers
                 }
 
             }
+            else
+            {
+                TempData["check"] = "Lỗi do chưa nhập đủ thông tin";
+            }
             return RedirectToAction("index", "H_BanQuanLy"); ;
         }
         [HttpPost]

@@ -42,7 +42,11 @@ namespace TTCNTT.Controllers
                 }
 
             }
-             return RedirectToAction("index", "H_GiaoVien"); 
+            else
+            {
+                TempData["check"] = "Lỗi do chưa nhập đủ thông tin";
+            }
+            return RedirectToAction("index", "H_GiaoVien"); 
         }
         [HttpPost]
         public ActionResult EditBangDiem(int idmonhoc, int idhocsinh, int idhocky, double diem15phutlan1, double diem15phutlan2, double diem45phutlan1, double diem45phutlan2, double diemhocky, string tongkethocky, string ghichu,int idbangdiem)
