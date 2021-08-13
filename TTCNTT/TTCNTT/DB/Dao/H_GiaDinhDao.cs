@@ -13,15 +13,15 @@ namespace TTCNTT.DB.Dao
         {
             db = new DBContext();
         }
-        public IEnumerable<THONGTINTRAODOICUAGIADINH> listChat()
+        public IEnumerable<THONGTINTRAODOICUAGIADINH> listChat(string x)
         {
-            var model = db.THONGTINTRAODOICUAGIADINHs.SqlQuery("select * from THONGTINTRAODOICUAGIADINH where id in (select top(20) id from THONGTINTRAODOICUAGIADINH where idnguoidung=1 order by thoigian desc) order by thoigian asc");
+            var model = db.THONGTINTRAODOICUAGIADINHs.SqlQuery("select * from THONGTINTRAODOICUAGIADINH where id in (select top(20) id from THONGTINTRAODOICUAGIADINH where idnguoidung="+x+" order by thoigian desc) order by thoigian asc");
             return model.ToList();
         }
-        public bool add(THONGTINTRAODOICUAGIADINH gd)
+        public bool add(THONGTINTRAODOICUAGIADINH gd, string x)
         {
             gd.thoigian = DateTime.Now;
-            gd.idnguoidung = 1;
+            gd.idnguoidung = int.Parse(x);
             db.THONGTINTRAODOICUAGIADINHs.Add(gd);
             db.SaveChanges();
             return true;
