@@ -4,65 +4,97 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<center>
+    <h2>LỊCH SỬ NGHỈ HỌC</h2>
 
-<h2>Danh sách đơn xin nghỉ học</h2>
 
-<p>
-    @Html.ActionLink("TẠO MỚI", "Create")
-</p>
+</center>
+
+
 <div class="container">
-
+    <p>
+        @Html.ActionLink("TẠO MỚI", "Create")
+    </p>
     <table class="table">
         <tr>
+            <th>STT</th>
             <th>
-                @Html.DisplayNameFor(model => model.HOCSINH.tenhocsinh)
+                Tên học sinh  
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LOP.tenlop)
+                Tên lớp
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.lydo)
+                Lý do
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.trangthai)
+                Trạng thái
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cophep)
+                Có phép?
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ngaynghi)
+                Ngày nghỉ
             </th>
             <th></th>
         </tr>
+        @{var i = 1; }
 
         @foreach (var item in Model)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.HOCSINH.tenhocsinh)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LOP.tenlop)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.lydo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.trangthai)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.cophep)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ngaynghi)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.idlichsunghihoc }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.idlichsunghihoc }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.idlichsunghihoc })
-                </td>
-            </tr>
-        }
+                    @i
+                @{ i++;}
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HOCSINH.tenhocsinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LOP.tenlop)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lydo)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.trangthai)*@
+                @{ if (item.trangthai == "1")
+                    {
+                        <div>
+                            Chấp nhận
+                        </div>
+                    }
+                    else if (item.trangthai == "2")
+                    {
+                        <div>
+                            Từ chối
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            Đang chờ duyệt
+
+
+                        </div>
+                    }
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cophep)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ngaynghi)
+            </td>
+            <td>
+                @Html.ActionLink("Chấp nhận", "ChapNhan", new { id = item.idlichsunghihoc }) |
+                @Html.ActionLink("Từ chối", "TuChoi", new { id = item.idlichsunghihoc }) |
+                @Html.ActionLink("Xóa", "Delete", new { id = item.idlichsunghihoc })
+
+            </td>
+        </tr>
+    }
 
     </table>
 </div>

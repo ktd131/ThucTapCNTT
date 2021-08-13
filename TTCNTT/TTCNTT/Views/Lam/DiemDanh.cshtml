@@ -1,0 +1,90 @@
+﻿@using PagedList.Mvc
+@using TTCNTT.Models
+@model PagedList.IPagedList<DiemDanhDto>
+@{
+    ViewBag.Title = "DiemDanh";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<center>
+    <h2>ĐIỂM DANH HỌC SINH</h2>
+
+</center>
+
+@Html.AntiForgeryToken()
+
+<div class="container">
+
+    <table class="table">
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+
+            </th>
+            <th>
+                Họ tên
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th></th>
+        </tr>
+        @{
+            var i = 1;
+
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @i
+                    @{ i++;}
+                </td>
+                <td>
+                    @{
+                        if (item.diemdanhnghi)
+                        {
+                            using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-actions no-color">
+                                    @Html.ActionLink("X", "DaoNguocNghi", new { id = item.idhocsinh })
+
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-actions no-color">
+                                    @Html.ActionLink("O", "DaoNguocNghi", new { id = item.idhocsinh })
+
+                                </div>
+                            }
+                        }
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tenhocsinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.trangthai)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id = item.idlichsunghihoc }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.idlichsunghihoc }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.idlichsunghihoc })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("DiemDanh", new { page }))
+
+</div>

@@ -41,7 +41,28 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.trangthai)
+            @{ if (Model.trangthai == "1")
+                {
+                    <div>
+                        Chấp nhận
+                    </div>
+                }
+                else if (Model.trangthai == "2")
+                {
+                    <div>
+                        Từ chối
+
+                    </div>
+                }
+                else
+                {
+                    <div>
+                        Đang chờ duyệt
+
+
+                    </div>
+                }
+            }
         </dd>
 
         <dt>
